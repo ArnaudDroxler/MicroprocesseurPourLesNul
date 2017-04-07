@@ -1,10 +1,17 @@
-var canvas;
+var canvas = null;
 
-function init(){
-    canvas = document.getElementById('canvas');
+window.onload = function(){
+    canvas = document.getElementById("canvas");
 
-    drawMicroProcesseur();
-}
+    var displayWidth = $('#container').width();
+    var displayHeight = $('#container').height();
+    canvas.width = parseInt(displayWidth * 0.8);
+    canvas.height =  parseInt(displayHeight * 0.8);
+
+    console.log(canvas.width);
+
+    tick();
+};
 
 function  drawMicroProcesseur() {
 
@@ -20,7 +27,7 @@ function  drawMicroProcesseur() {
     //Micropreocesseur
     $('canvas').drawRect({
         fillStyle: '#fdff3d',
-        x:0, y: 0,
+        x:100, y: 100,
         width: 100,
         height: 100,
         fromCenter: false
@@ -28,4 +35,15 @@ function  drawMicroProcesseur() {
 
 }
 
-init();
+function resize(){
+    var displayWidth = $('#container').width();
+    var displayHeight = $('#container').height();
+    canvas.width = parseInt(displayWidth * 0.8);
+    canvas.height =  parseInt(displayHeight * 0.8);
+}
+
+function tick() {
+    requestAnimationFrame(tick);
+    resize();
+    drawMicroProcesseur();
+}
